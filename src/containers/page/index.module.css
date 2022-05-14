@@ -1,0 +1,10 @@
+.page {
+    background-color: #191414;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.children {
+    width: 100%;
+}
