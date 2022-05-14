@@ -1,8 +1,8 @@
-import { ExternalUrl, SpotifyFollowers, SpotifyImage } from "./Common";
+import { ExternalUrl, SpotifyTotal, SpotifyImage } from "./Common";
 
 export type Artist = {
     external_urls: ExternalUrl;
-    followers: SpotifyFollowers
+    followers: SpotifyTotal
     genres: string[];
     href: string
     id: string

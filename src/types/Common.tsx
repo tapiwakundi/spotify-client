@@ -8,7 +8,15 @@ export type SpotifyImage = {
     width: number
 }
 
-export type SpotifyFollowers = {
+export type SpotifyTotal = {
     href?: string;
     total: number
+}
+export type SpotifyOwner = {
+    display_name: string
+    external_urls: ExternalUrl
+    href: string
+    id: string
+    type: string
+    uri: string
 }

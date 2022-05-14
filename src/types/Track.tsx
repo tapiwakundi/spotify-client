@@ -20,3 +20,7 @@ export type Track = {
     uri: string
 }
 
+export type PlaylistTrack = {
+    added_at: string
+    track: Track
+}

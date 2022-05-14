@@ -3,13 +3,21 @@ import { Page } from '../../containers/Page'
 import styles from './index.module.css'
 import { useAuth } from '../../hooks/useAuth'
 import * as SpotifyApi from '../../api'
-import { Track, User, Artist } from '../../types'
+import { Track, User, Artist, Playlist, PlaylistTrack } from '../../types'
 import * as SessionStorage from '../../utils/sessionStorage'
-import { Profile, FavoriteArtists, TopTrackAnalysis, FavoriteTracks } from '../../containers'
+import { Profile, FavoriteArtists, PlaylistWithAnalysis, FavoriteTracks } from '../../containers'
 import { Typography } from '../../components'
 import { BsChevronRight } from 'react-icons/bs'
+import { findAverage } from '../../utils/averages'
+import { processChartData } from '../../helpers/processChartData'
 type Props = {
     code?: string
+}
+
+type ChartData = {
+    label: string
+    A: number
+    fullMark: number
 }
 
 
@@ -18,22 +26,52 @@ export const Dashboard = ({ code }: Props) => {
     const [user, setUser] = React.useState<User>()
     const [topTracks, setTopTracks] = React.useState<Track[]>([])
     const [topArtists, setTopArtists] = React.useState<Artist[]>([])
+    const [playlists, setPlaylists] = React.useState<Playlist[]>([])
+    const [playlistTracks, setPlaylistTracks] = React.useState<PlaylistTrack[]>([])
+    const [playlistChartData, setPlaylistChartData] = React.useState<ChartData[]>([])
 
     React.useEffect(() => {
         if (!accessToken) return;
 
-        SpotifyApi.User.getUserInfo().then(data => {
-            setUser(data.user)
-            setTopArtists(data.topArtists.items)
-            setTopTracks(data.topTracks.items)
-            SessionStorage.setUserId(data.user.id)
-        })
+        SpotifyApi.User.getUserInfo()
+            .then(data => {
+                setUser(data.user)
+                setTopArtists(data.topArtists.items)
+                setTopTracks(data.topTracks.items)
+                setPlaylists(data.playlists.items)
+                SessionStorage.setUserId(data.user.id)
+            })
 
     }, [accessToken]);
+
+    React.useEffect(() => {
+        if (playlists?.length > 0) {
+            SpotifyApi.Playlists
+                .getPlaylistTracks(playlists[0].id)
+                .then(res => {
+                    setPlaylistTracks(res.data.items)
+                })
+        }
+    }, [playlists])
+
+    React.useEffect(() => {
+        if (playlistTracks?.length > 0) {
+            SpotifyApi.Tracks
+                .getAudioFeaturesForTracks(playlistTracks.map(track => track.track))
+                .then(res => {
+                    const chartData = processChartData(res.data.audio_features)
+                    console.log("chart data", chartData);
+
+                    setPlaylistChartData(chartData)
+                })
+        }
+    }, [playlistTracks])
 
     if (!user) {
         return null
     }
+
+
 
 
 
@@ -53,7 +91,7 @@ export const Dashboard = ({ code }: Props) => {
 
                 <div>
                     <Typography.Title1>Top Tracks Analysis</Typography.Title1>
-                    <TopTrackAnalysis />
+                    <PlaylistWithAnalysis playlist={playlists[0]} chartData={playlistChartData} />
                 </div>
 
                 <div>

@@ -1,0 +1,15 @@
+.playlist_container {
+    display: flex;
+    background-color: #2C2C2C;
+    padding: 1em;
+    border-radius: 10px;
+    margin-right: 3em;
+}
+
+.playlist_image {
+    width: 20em;
+}
+
+.chart {
+    margin-left: 1em;
+}

@@ -24,23 +24,24 @@ export const getTrackInfo = (trackId: string) =>
                 audioFeatures: audioFeatures.data,
             })),
         );
-// export const getAudioFeaturesForTracks = (tracks: Track[]) => {
-//     const ids = getTrackIds(tracks);
-//     return axios.get(`https://api.spotify.com/v1/audio-features?ids=${ids}`, { headers });
-// };
 
-// export const getRecommendationsForTracks = (tracks: Track[]) => {
-//     const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
-//     const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
-//     const seed_artists = '';
-//     const seed_genres = '';
+export const getAudioFeaturesForTracks = (tracks: Track[]) => {
+    const ids = getTrackIds(tracks);
+    return axios.get(`https://api.spotify.com/v1/audio-features?ids=${ids}`, { headers });
+};
 
-//     return axios.get(
-//         `https://api.spotify.com/v1/recommendations?seed_tracks=${seed_tracks}&seed_artists=${seed_artists}&seed_genres=${seed_genres}`,
-//         {
-//             headers,
-//         },
-//     );
-// };
+export const getRecommendationsForTracks = (tracks: Track[]) => {
+    const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
+    const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
+    const seed_artists = '';
+    const seed_genres = '';
 
-// export const getTrackIds = (tracks: Track[]) => tracks.map(({ track }) => track.id).join(',');
+    return axios.get(
+        `https://api.spotify.com/v1/recommendations?seed_tracks=${seed_tracks}&seed_artists=${seed_artists}&seed_genres=${seed_genres}`,
+        {
+            headers,
+        },
+    );
+};
+
+export const getTrackIds = (tracks: Track[]) => tracks.map((track) => track.id).join(',');

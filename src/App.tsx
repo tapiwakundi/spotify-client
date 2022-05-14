@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/Login';
 import { UserContext } from './context/userContext'
+import { FavoriteTracks } from './pages/FavoriteTracks';
 const code = new URLSearchParams(window.location.search).get('code')
 
 function App() {
@@ -15,7 +16,15 @@ function App() {
         display_name: '',
         email: ''
       }}>
-        {code ? <Dashboard code={code} /> : <Login />}
+        {code ?
+          <Router>
+            <Routes>
+              <Route path="/" element={<Dashboard code={code} />} />
+              <Route path="favorite-tracks" element={<FavoriteTracks />} />
+            </Routes>
+          </Router>
+          : <Login />
+        }
 
       </UserContext.Provider>
 
