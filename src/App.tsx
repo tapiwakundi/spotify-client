@@ -2,8 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Dashboard } from './pages/dashboard';
-import { Login } from './pages/login';
+import { Dashboard } from './pages/Dashboard';
+import { Login } from './pages/Login';
 import { UserContext } from './context/userContext'
 const code = new URLSearchParams(window.location.search).get('code')
 

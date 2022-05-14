@@ -7,8 +7,6 @@ type Props = {
 }
 
 export const FavoriteArtists = ({ artists }: Props) => {
-    console.log(artists);
-
     return <div className={styles.main_container}>
         {
             artists.map(artist => {

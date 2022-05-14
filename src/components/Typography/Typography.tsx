@@ -1,7 +1,8 @@
 import styles from './index.module.css'
 
 type Props = {
-    children: string
+    children: string;
+    className?: string;
 }
 
 export const Typography = () => { }
@@ -26,8 +27,8 @@ const Callout = ({ children }: Props) => {
     return <span className={styles.callout}>{children}</span>
 }
 
-const Callout2 = ({ children }: Props) => {
-    return <span className={styles.callout2}>{children}</span>
+const Callout2 = ({ children, className }: Props) => {
+    return <span className={`${styles.callout2} ${className}`}>{children}</span>
 }
 
 Typography.Title1 = Title1

@@ -5,3 +5,36 @@
 .left_container {
     width: 70%
 }
+
+.title_container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2em;
+    align-items: baseline;
+}
+
+.see_more {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 10em;
+}
+
+.see_more_text {
+    transition: 0.2s ease-in-out;
+
+}
+
+.see_more_text:hover {
+    margin-right: 10px;
+    transition: 0.2s ease-in-out;
+    color: #fff;
+}
+
+.chevron_right {
+    padding-top: 2px;
+}
+
+.see_more:hover {
+    cursor: pointer;
+}
