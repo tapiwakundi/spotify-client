@@ -19,7 +19,7 @@ export const getRecentlyPlayed = () =>
 export const getPlaylists = () => axios.get('https://api.spotify.com/v1/me/playlists', { headers });
 
 export const getTopArtistsShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term', {
+    axios.get('https://api.spotify.com/v1/me/top/artists?limit=10&time_range=short_term', {
         headers,
     });
 export const getTopArtistsMedium = () =>
@@ -30,7 +30,7 @@ export const getTopArtistsLong = () =>
     axios.get('https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term', { headers });
 
 export const getTopTracksShort = () =>
-    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=short_term', { headers });
+    axios.get('https://api.spotify.com/v1/me/top/tracks?limit=10&time_range=short_term', { headers });
 export const getTopTracksMedium = () =>
     axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term', {
         headers,
@@ -41,7 +41,7 @@ export const getTopTracksLong = () =>
 
 export const getUserInfo = () =>
     axios
-        .all([getUser(), getFollowing(), getPlaylists(), getTopArtistsLong(), getTopTracksLong()])
+        .all([getUser(), getFollowing(), getPlaylists(), getTopArtistsShort(), getTopTracksShort()])
         .then(
             axios.spread((user, followedArtists, playlists, topArtists, topTracks) => ({
                 user: user.data,

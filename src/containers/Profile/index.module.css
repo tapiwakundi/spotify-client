@@ -1,0 +1,10 @@
+.profile_container {
+    background-color: #2D2D2D;
+    border-radius: 10px;
+    padding: 2em;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 5em;
+}

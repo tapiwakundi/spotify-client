@@ -1,5 +1,5 @@
 import { Artist } from "./Artist"
-import { ExternalUrl } from "./Common"
+import { ExternalUrl, SpotifyImage } from "./Common"
 
 export type Album = {
     album_type: string
@@ -7,17 +7,11 @@ export type Album = {
     external_urls: ExternalUrl
     href: string
     id: string
-    images: AlbumImage[]
+    images: SpotifyImage[]
     name: string
     release_date: string
     release_date_precision: string
     total_tracks: number
     type: string
     uri: string
-}
-
-type AlbumImage = {
-    height: number
-    url: string
-    width: number
 }
