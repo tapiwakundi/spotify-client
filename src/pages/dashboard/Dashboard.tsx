@@ -4,43 +4,43 @@ import { Page } from '../../containers/page'
 import styles from './index.module.css'
 import { FaUserCircle } from 'react-icons/fa'
 import { useAuth } from '../../hooks/useAuth'
-import SpotifyWebApi from "spotify-web-api-node";
-
+import * as SpotifyApi from '../../api'
+import { Track, User } from '../../types'
+import * as SessionStorage from '../../utils/sessionStorage'
 type Props = {
     code?: string
 }
 
-type User = {
-    display_name: string;
-    email: string;
-}
-
-const spotifyApi = new SpotifyWebApi({
-    clientId: "06c481fdcd4f4b95b5adab50779f4822",
-});
 
 export const Dashboard = ({ code }: Props) => {
     const accessToken = useAuth(code);
     const [user, setUser] = React.useState<User>()
+    const [topTracks, setTopTracks] = React.useState<Track[]>([])
 
     React.useEffect(() => {
         if (!accessToken) return;
 
-        // Setting Up the spotifyApi with AccessToken so that we can use its functions anywhere in the component without setting AccessToken value again & again. 
-        spotifyApi.setAccessToken(accessToken);
+        SpotifyApi.User.getUserInfo().then(data => {
+            setUser(data.user)
+            SessionStorage.setUserId(data.user.id)
+            console.log(data.topTracks.items[0]);
 
-        // Get user details with help of getMe() function
-        spotifyApi.getMe().then(data => {
-            setUser(data.body as User)
         })
+
     }, [accessToken]);
+
+    if (!user) {
+        return null
+    }
+
+
 
     return <Page>
         <section className={styles.profile_container}>
             {
                 <FaUserCircle size={175} />
             }
-            <Typography.Title1>{user?.display_name!}</Typography.Title1>
+            <Typography.Title1>{user.display_name}</Typography.Title1>
 
         </section>
     </Page>

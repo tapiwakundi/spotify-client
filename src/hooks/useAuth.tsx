@@ -1,11 +1,15 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import * as LocalSession from '../utils/sessionStorage'
 
 export function useAuth(code?: string) {
     const [accessToken, setAccessToken] = useState();
 
     useEffect(() => {
+        if (!code) {
+            return
+        }
         axios
             .post("http://localhost:8000/login", { code })
             .then((response) => {
@@ -14,7 +18,7 @@ export function useAuth(code?: string) {
                 window.history.pushState({}, '', "/");
 
                 setAccessToken(response.data.accessToken);
-
+                LocalSession.setLocalAccessToken(response.data.accessToken)
             })
             .catch((e) => {
                 //   If fail redirect to home page - Login page
