@@ -4,20 +4,21 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Dashboard } from './pages/dashboard';
 import { Login } from './pages/login';
+import { UserContext } from './context/userContext'
 const code = new URLSearchParams(window.location.search).get('code')
 
 function App() {
+
   return (
     <div className="app">
-      <Router>
-        <Routes>
-          {code ? <Route path="/" element={<Dashboard />}>
-          </Route>
-            :
-            <Route path="/" element={<Login />}></Route>
-          }
-        </Routes>
-      </Router>
+      <UserContext.Provider value={{
+        display_name: '',
+        email: ''
+      }}>
+        {code ? <Dashboard code={code} /> : <Login />}
+
+      </UserContext.Provider>
+
     </div>
 
   );
