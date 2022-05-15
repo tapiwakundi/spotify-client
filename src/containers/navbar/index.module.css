@@ -8,4 +8,10 @@
     position: fixed;
     left: 0;
     height: 100vh;
+    margin-bottom: 25em;
+}
+
+.nav_options {
+    height: 70vh;
+    width: 80px;
 }

@@ -6,7 +6,7 @@ import { Track, User, Artist } from '../../types'
 import { TrackItem, Typography } from '../../components'
 import { BsChevronRight } from 'react-icons/bs'
 
-export const FavoriteTracks = () => {
+export const FavoriteArtists = () => {
     const [topTracks, setTopTracks] = React.useState<Track[]>([])
 
     React.useEffect(() => {
@@ -16,9 +16,6 @@ export const FavoriteTracks = () => {
                 setTopTracks(res.data.items)
             })
     }, []);
-
-    console.log(topTracks);
-
 
     return (
         <Page>

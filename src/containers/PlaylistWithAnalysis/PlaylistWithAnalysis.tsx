@@ -9,18 +9,16 @@ type Props = {
 }
 
 export const PlaylistWithAnalysis = ({ playlist, chartData }: Props) => {
-    console.log(chartData);
-
     return <div className={styles.playlist_container}>
         <div className={styles.artist_container}>
             <img src={playlist.images[0].url} className={styles.playlist_image} alt="artist" />
             <div className={styles.text_container}>
                 <Typography.Caption2>{playlist.name}</Typography.Caption2>
-                <Typography.Caption>{playlist.tracks.total.toString()}</Typography.Caption>
+                <Typography.Callout2>{`${playlist.tracks.total.toString()} tracks`}</Typography.Callout2>
             </div>
         </div>
 
-        <ResponsiveContainer width="100%" height={320} className={styles.chart}>
+        <ResponsiveContainer width={400} height={320} className={styles.chart}>
             <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="label" />

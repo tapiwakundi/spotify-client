@@ -21,8 +21,7 @@ type ChartData = {
 }
 
 
-export const Dashboard = ({ code }: Props) => {
-    const accessToken = useAuth(code);
+export const Dashboard = () => {
     const [user, setUser] = React.useState<User>()
     const [topTracks, setTopTracks] = React.useState<Track[]>([])
     const [topArtists, setTopArtists] = React.useState<Artist[]>([])
@@ -31,8 +30,6 @@ export const Dashboard = ({ code }: Props) => {
     const [playlistChartData, setPlaylistChartData] = React.useState<ChartData[]>([])
 
     React.useEffect(() => {
-        if (!accessToken) return;
-
         SpotifyApi.User.getUserInfo()
             .then(data => {
                 setUser(data.user)
@@ -42,13 +39,15 @@ export const Dashboard = ({ code }: Props) => {
                 SessionStorage.setUserId(data.user.id)
             })
 
-    }, [accessToken]);
+    }, []);
 
     React.useEffect(() => {
         if (playlists?.length > 0) {
             SpotifyApi.Playlists
-                .getPlaylistTracks(playlists[0].id)
+                .getPlaylistTracks(playlists[2].id)
                 .then(res => {
+                    console.log(res.data.items);
+
                     setPlaylistTracks(res.data.items)
                 })
         }
@@ -60,8 +59,6 @@ export const Dashboard = ({ code }: Props) => {
                 .getAudioFeaturesForTracks(playlistTracks.map(track => track.track))
                 .then(res => {
                     const chartData = processChartData(res.data.audio_features)
-                    console.log("chart data", chartData);
-
                     setPlaylistChartData(chartData)
                 })
         }
@@ -70,10 +67,6 @@ export const Dashboard = ({ code }: Props) => {
     if (!user) {
         return null
     }
-
-
-
-
 
     return <Page>
         <div className={styles.dashboard_container}>
@@ -90,8 +83,8 @@ export const Dashboard = ({ code }: Props) => {
                 </div>
 
                 <div>
-                    <Typography.Title1>Top Tracks Analysis</Typography.Title1>
-                    <PlaylistWithAnalysis playlist={playlists[0]} chartData={playlistChartData} />
+                    <Typography.Title1>Playlist Analysis</Typography.Title1>
+                    <PlaylistWithAnalysis playlist={playlists[2]} chartData={playlistChartData} />
                 </div>
 
                 <div>
