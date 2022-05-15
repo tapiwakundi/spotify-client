@@ -8,12 +8,10 @@ import { UserContext } from './context/userContext'
 import { FavoriteTracks } from './pages/FavoriteTracks';
 import * as LocalSession from './utils/sessionStorage'
 import axios from 'axios';
+import { FavoriteArtists } from './pages/FavoriteArtists';
+
 const code = new URLSearchParams(window.location.search).get('code') || undefined
 const localToken = LocalSession.getLocalAccessToken() || undefined
-
-console.log(code);
-
-
 
 function App() {
   const [token, setToken] = React.useState<string | undefined>(localToken)
@@ -43,6 +41,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="favorite-tracks" element={<FavoriteTracks />} />
+              <Route path="favorite-artists" element={<FavoriteArtists />} />
+
             </Routes>
           </Router>
           : <Login />

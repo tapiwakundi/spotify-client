@@ -3,17 +3,17 @@ import { Page } from '../../containers/Page'
 import styles from './index.module.css'
 import * as SpotifyApi from '../../api'
 import { Track, User, Artist } from '../../types'
-import { TrackItem, Typography } from '../../components'
+import { ArtistItem, TrackItem, Typography } from '../../components'
 import { BsChevronRight } from 'react-icons/bs'
 
 export const FavoriteArtists = () => {
-    const [topTracks, setTopTracks] = React.useState<Track[]>([])
+    const [topArtists, setTopArtists] = React.useState<Artist[]>([])
 
     React.useEffect(() => {
         SpotifyApi.User
-            .getTopTracksShort()
+            .getTopArtistsShort()
             .then((res) => {
-                setTopTracks(res.data.items)
+                setTopArtists(res.data.items)
             })
     }, []);
 
@@ -21,13 +21,11 @@ export const FavoriteArtists = () => {
         <Page>
             <div className={styles.dashboard_container}>
                 <div className={styles.title_container}>
-                    <Typography.Title1>Favorite Tracks</Typography.Title1>
-                    <a className={styles.see_more} href="/favorite-tracks">
-                        <Typography.Callout2 className={styles.see_more_text}>see more</Typography.Callout2>
-                        <BsChevronRight color="#929292" className={styles.chevron_right} />
-                    </a>
+                    <Typography.Title1>Favorite Artists</Typography.Title1>
                 </div>
-                {topTracks.map(track => <TrackItem track={track} />)}
+                <div className={styles.artist_grid}>
+                    {topArtists.map(artist => <ArtistItem artist={artist} />)}
+                </div>
             </div>
         </Page>
     )

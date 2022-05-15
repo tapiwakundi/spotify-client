@@ -1,0 +1,17 @@
+.artist_container {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    padding: 1em
+}
+
+.artist_container:hover {
+    background-color: #2C2C2C;
+    border-radius:10px
+}
+
+.text_container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}

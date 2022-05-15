@@ -1,25 +1,19 @@
 import React from 'react'
 import { Page } from '../../containers/Page'
 import styles from './index.module.css'
-import { useAuth } from '../../hooks/useAuth'
 import * as SpotifyApi from '../../api'
 import { Track, User, Artist, Playlist, PlaylistTrack } from '../../types'
 import * as SessionStorage from '../../utils/sessionStorage'
 import { Profile, FavoriteArtists, PlaylistWithAnalysis, FavoriteTracks } from '../../containers'
 import { Typography } from '../../components'
 import { BsChevronRight } from 'react-icons/bs'
-import { findAverage } from '../../utils/averages'
 import { processChartData } from '../../helpers/processChartData'
-type Props = {
-    code?: string
-}
 
 type ChartData = {
     label: string
     A: number
     fullMark: number
 }
-
 
 export const Dashboard = () => {
     const [user, setUser] = React.useState<User>()
@@ -38,7 +32,6 @@ export const Dashboard = () => {
                 setPlaylists(data.playlists.items)
                 SessionStorage.setUserId(data.user.id)
             })
-
     }, []);
 
     React.useEffect(() => {
