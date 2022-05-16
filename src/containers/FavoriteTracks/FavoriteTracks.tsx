@@ -1,6 +1,5 @@
 
-import styles from './index.module.css'
-import { TrackItem, Typography } from '../../components';
+import { TrackItem } from '../../components';
 import { Track } from '../../types';
 
 type Props = {

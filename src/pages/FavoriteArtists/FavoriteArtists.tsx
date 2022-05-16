@@ -2,9 +2,8 @@ import React from 'react'
 import { Page } from '../../containers/Page'
 import styles from './index.module.css'
 import * as SpotifyApi from '../../api'
-import { Track, User, Artist } from '../../types'
-import { ArtistItem, TrackItem, Typography } from '../../components'
-import { BsChevronRight } from 'react-icons/bs'
+import { Artist } from '../../types'
+import { ArtistItem, Typography } from '../../components'
 
 export const FavoriteArtists = () => {
     const [topArtists, setTopArtists] = React.useState<Artist[]>([])
