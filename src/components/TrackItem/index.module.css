@@ -1,7 +1,9 @@
 .track_container {
+    all: unset;
     display: flex;
     margin: 1em 0;
-    padding: 0.5em
+    padding: 0.5em;
+    cursor: pointer;
 }
 
 .track_container:hover {

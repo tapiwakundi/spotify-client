@@ -1,0 +1,16 @@
+.track_info_container {
+    display: flex;
+    height: 100vh;
+}
+
+.track_text_container {
+    margin-left: 3em;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.album_cover {
+    width: 320px;
+    height: 320px;
+}
