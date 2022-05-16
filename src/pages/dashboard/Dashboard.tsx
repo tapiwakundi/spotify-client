@@ -31,6 +31,7 @@ export const Dashboard = () => {
                 setTopTracks(data.topTracks.items)
                 setPlaylists(data.playlists.items)
                 SessionStorage.setUserId(data.user.id)
+
             })
     }, []);
 

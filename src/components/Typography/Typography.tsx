@@ -7,6 +7,10 @@ type Props = {
 
 export const Typography = () => { }
 
+const LargeTitle = ({ children }: Props) => {
+    return <h1 style={{ fontSize: '2em' }}>{children}</h1>
+}
+
 const Title1 = ({ children }: Props) => {
     return <h1>{children}</h1>
 }
@@ -30,7 +34,7 @@ const Callout = ({ children }: Props) => {
 const Callout2 = ({ children, className }: Props) => {
     return <span className={`${styles.callout2} ${className}`}>{children}</span>
 }
-
+Typography.LargeTitle = LargeTitle
 Typography.Title1 = Title1
 Typography.Caption = Caption
 Typography.Caption2 = Caption2

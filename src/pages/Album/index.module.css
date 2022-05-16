@@ -1,0 +1,15 @@
+.album_info_container {
+    display: flex;
+}
+
+.album_text_container {
+    margin-left: 3em;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.album_cover {
+    width: 12em;
+    height: 12em;
+}
