@@ -2,7 +2,7 @@ import React from 'react'
 import { Page } from '../../containers/Page'
 import styles from './index.module.css'
 import * as SpotifyApi from '../../api'
-import { Track, User, Artist } from '../../types'
+import { Track } from '../../types'
 import { TrackItem, Typography } from '../../components'
 import { BsChevronRight } from 'react-icons/bs'
 
@@ -16,9 +16,6 @@ export const FavoriteTracks = () => {
                 setTopTracks(res.data.items)
             })
     }, []);
-
-    console.log(topTracks);
-
 
     return (
         <Page>

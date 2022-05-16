@@ -10,11 +10,11 @@ type Props = {
 export const ArtistItem = ({ artist }: Props) => {
     console.log('artist', artist);
 
-    return <div className={styles.artist_container}>
+    return <a className={styles.artist_container} href={`/artist/${artist.id}`}>
         <img src={artist.images[1].url} className={styles.artistImage} alt="artist" />
         <div className={styles.text_container}>
             <Typography.Caption2>{artist.name}</Typography.Caption2>
             <Typography.Caption>{`${numberWithCommas(artist.followers.total)} followers`}</Typography.Caption>
         </div>
-    </div>
+    </a>
 }

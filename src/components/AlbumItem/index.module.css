@@ -1,4 +1,4 @@
-.artist_container {
+.album_container {
     display: flex;
     flex-direction: column;
     min-width: 200px;
@@ -6,7 +6,7 @@
     all: unset;
 }
 
-.artist_container:hover {
+.album_container:hover {
     background-color: #2C2C2C;
     border-radius:10px
 }

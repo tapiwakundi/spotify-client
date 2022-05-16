@@ -4,11 +4,14 @@ import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Dashboard } from './pages/Dashboard';
 import { Login } from './pages/Login';
+import { Artist } from './pages/Artist';
 import { UserContext } from './context/userContext'
 import { FavoriteTracks } from './pages/FavoriteTracks';
 import * as LocalSession from './utils/sessionStorage'
 import axios from 'axios';
 import { FavoriteArtists } from './pages/FavoriteArtists';
+import { Track } from './pages/Track';
+import { Album } from './pages/Album';
 
 const code = new URLSearchParams(window.location.search).get('code') || undefined
 const localToken = LocalSession.getLocalAccessToken() || undefined
@@ -42,6 +45,9 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="favorite-tracks" element={<FavoriteTracks />} />
               <Route path="favorite-artists" element={<FavoriteArtists />} />
+              <Route path="artist/:id" element={<Artist />} />
+              <Route path="track/:id" element={<Track />} />
+              <Route path="album/:id" element={<Album />} />
 
             </Routes>
           </Router>
