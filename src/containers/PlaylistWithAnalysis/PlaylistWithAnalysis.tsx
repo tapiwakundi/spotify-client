@@ -1,4 +1,3 @@
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 import styles from './index.module.css'
 import { FeatureAnalysis, Typography } from '../../components'
 import { Playlist, ChartData } from '../../types';

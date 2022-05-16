@@ -1,13 +1,13 @@
 import React from "react"
 import { useParams } from 'react-router-dom'
-import { Album as AlbumModel, Track as TrackModel, ChartData } from '../../types'
-import { Typography, TrackItem, FeatureAnalysis } from "../../components"
+import { Track as TrackModel, ChartData } from '../../types'
+import { Typography, FeatureAnalysis } from "../../components"
 import { Page } from "../../containers"
 import * as SpotifyApi from '../../api'
 import styles from './index.module.css'
 import moment from "moment"
 import { processChartData } from '../../helpers/processChartData'
-
+import { formatDurationXMYS } from '../../helpers/formatDuration'
 export const Track = () => {
     const { id } = useParams()
     const [track, setTrack] = React.useState<TrackModel | null>()
@@ -30,13 +30,14 @@ export const Track = () => {
     }
 
     return <Page>
+        <section className={styles.track_text_container}>
+            <Typography.LargeTitle>{track.name}</Typography.LargeTitle>
+            <Typography.Callout2>{track.album.name}</Typography.Callout2>
+            <Typography.Callout2>{moment(track.album.release_date).format('ll')}</Typography.Callout2>
+            <Typography.Callout2>{formatDurationXMYS(track.duration_ms)}</Typography.Callout2>
+        </section>
         <section className={styles.track_info_container}>
             <img src={track.album.images[0].url} alt="album cover" className={styles.album_cover} />
-            <div className={styles.track_text_container}>
-                <Typography.LargeTitle>{track.name}</Typography.LargeTitle>
-                <Typography.Caption>{moment(track.album.release_date).format('ll')}</Typography.Caption>
-
-            </div>
             <FeatureAnalysis chartData={trackChartData} />
         </section>
     </Page>
